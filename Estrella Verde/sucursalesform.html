@@ -1,0 +1,325 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Sucursales</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        
+         <script>
+    function insertarSucursal()
+{
+    var NuevoSucursal = new Object();
+    NuevoSucursal.Id = document.getElementById("Id_I").value;
+    NuevoSucursal.Provincia = document.getElementById("Provincia_I").value;
+    NuevoSucursal.Distrito = document.getElementById("Distrito_I").value;
+    NuevoSucursal.Canton = document.getElementById("Canton_I").value;
+    NuevoSucursal.Nombre = document.getElementById("Nombre_I").value;
+    NuevoSucursal.op = "Insertar";
+    $.ajax({
+        url: "http://localhost:1331/Api/Sucursal",
+        type: "POST",
+        datatype: "json",
+        data: NuevoSucursal,
+        success: function(data,textstatus,xhr){
+        if(data=1)
+        {
+        Alert("Sucursal insertado correctamente lml");
+    }
+    },
+        error:function(xhr,textstatus,errorThrown){
+        Alert(textstatus);
+    }
+    });
+}
+
+function modificarSucursal()
+{
+    var NuevoSucursal = new Object();
+    NuevoSucursal.Id = document.getElementById("Id_M").value;
+    NuevoSucursal.Provincia = document.getElementById("Provincia_M").value;
+    NuevoSucursal.Distrito = document.getElementById("Distrito_M").value;
+    NuevoSucursal.Canton = document.getElementById("Canton_M").value;
+    NuevoSucursal.Nombre = document.getElementById("Nombre_M").value;
+    
+    NuevoSucursal.op = "Modificar";
+    $.ajax({
+        url: "http://localhost:1331/Api/Sucursal",
+        type: "POST",
+        datatype: "json",
+        data: NuevoSucursal,
+        success: function(data,textstatus,xhr){
+        if(data=1)
+        {
+        Alert("Sucursal Modificado correctamente lml");
+    }
+    },
+        error:function(xhr,textstatus,errorThrown){
+        Alert(textstatus);
+    }
+    });
+}
+
+function seleccionarSucursal()
+{
+    var NuevoSucursal = new Object();
+    NuevoSucursal.Id = document.getElementById("Id_S").value;
+    NuevoSucursal.op = "Seleccionar";
+    $.ajax({
+        url: "http://localhost:1331/Api/Sucursal",
+        type: "POST",
+        datatype: "json",
+        data: NuevoSucursal,
+        success: function(data,textstatus,xhr){
+        if(data=1)
+        {
+        Alert("Sucursal seleccionado correctamente lml");
+    }
+    },
+        error:function(xhr,textstatus,errorThrown){
+        Alert(textstatus);
+    }
+    });
+}
+
+function eliminarSucursal()
+{
+    var NuevoSucursal = new Object();
+    NuevoSucursal.Id = document.getElementById("Id_E").value;
+    NuevoSucursal.op = "Eliminar";
+    $.ajax({
+        url: "http://localhost:1331/Api/Sucursal",
+        type: "POST",
+        datatype: "json",
+        data: NuevoSucursal,
+        success: function(data,textstatus,xhr){
+        if(data=1)
+        {
+        alert("Sucursal eliminado correctamente lml");
+    }
+    },
+        error:function(xhr,textstatus,errorThrown){
+        alert(textstatus);
+    }
+    });
+}
+             
+             function logout(){
+           localStorage.Usuario='papoi';
+            location.href="index.html";
+            }
+            
+                          function comprobar(){
+            if(localStorage.Usuario=='papoi'){
+                location.href="index.html";
+            }
+            
+        }
+    </script>
+	</head>
+	<body onload="comprobar()">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" >
+					<h1><a href="indexADMIN.html">Estrella Verde</a> Cafesito rikolino</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="indexADMIN.html">Página principal</a></li>
+						
+                               <li>
+								<a href="#" class="icon fa-angle-down">Formularios</a>
+								<ul>
+									<li><a href="productosform.html">Productos</a></li>
+									<li><a href="licoresform.html">Licores</a></li>
+									<li><a href="combosform.html">Combos</a></li>
+									<li><a href="sucursalesform.html">Sucursales</a></li>
+                                    <li><a href="producto_licorform.html">Producto_Licor</a></li>
+                                    <li><a href="producto_comboform.html">Producto_Combo</a></li>
+                                    <li><a href="sucursal_comboform.html">Sucursal_Combo</a></li>
+									
+								</ul>
+							</li>
+							
+							<li><a href="index.html" class="button special" onclick="logout()">Cerrar Sesion</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Sucursales</h2>
+						<p>Nos encontramos en diferentes rincones del pais.</p>
+					</header>
+				 
+					
+                    <div class="box">
+						<form method="post" action="#">
+							<div class="row uniform 50%">
+							<p>Buscar una sucursal</p>
+								<div class="12u">
+									<input type="number" name="Id_S" id="Id_S" value="" placeholder="Id" required/>
+								</div>
+								
+								
+								
+								
+								
+							</div>
+							
+							
+							
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Buscar" onclick="seleccionarSucursal()"/></li>
+									</ul>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+					
+					<div class="box">
+						<form method="post" action="#">
+							<div class="row uniform 50%">
+							<p>Insertar una sucursal</p>
+								<div class="12u">
+									<input type="number" name="Id" id="Id_I" value="" placeholder="Id" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Provincia" id="Provincia_I" value="" placeholder="Provincia" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Canton" id="Canton_I" value="" placeholder="Canton" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Distrito" id="Distrito_I" value="" placeholder="Distrito" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Nombre" id="Nombre_I" value="" placeholder="Nombre" required/>
+								</div>
+								
+								
+								
+							</div>
+							
+							
+							
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Guardar" onclick="insertarSucursal()"/></li>
+									</ul>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+                    
+                    <div class="box">
+						<form method="post" action="#">
+							<div class="row uniform 50%">
+							<p>Modificar una sucursal</p>
+								<div class="12u">
+									<input type="number" name="Id_M" id="Id_M" value="" placeholder="Id" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Provincia" id="Provincia_M" value="" placeholder="Provincia" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Canton" id="Canton_M" value="" placeholder="Canton" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Distrito" id="Distrito_M" value="" placeholder="Distrito" required/>
+								</div>
+								
+								<div class="12u">
+									<input type="text" name="Nombre" id="Nombre_M" value="" placeholder="Nombre" required/>
+								</div>
+								
+								
+								
+							</div>
+							
+							
+							
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Modificar" onclick="modificarSucursal()"/></li>
+									</ul>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+                    
+                    <div class="box">
+						<form method="post" action="#">
+							<div class="row uniform 50%">
+							<p>Eliminar una sucursal</p>
+								<div class="12u">
+									<input type="number" name="Id" id="Id_E" value="" placeholder="Id" required/>
+								</div>
+								
+								
+								
+								
+								
+							</div>
+							
+							
+							
+							<div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Eliminar" onclick="eliminarSucursal()"/></li>
+									</ul>
+								</div>
+							</div>
+							
+						</form>
+					</div>
+                    
+                    
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Todos los derechos reservados</li><li>Desarrollador: Tu gfa</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

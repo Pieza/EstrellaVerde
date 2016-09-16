@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Sucursales</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+        
+     
+    
+	</head>
+	<body onload="listadesucursales()">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" >
+					<h1><a href="index.html">Estrella Verde</a> Cafesito rikolino</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="index.html">Página principal</a></li>
+							<li>
+								<a href="#" class="icon fa-angle-down">Menú</a>
+								<ul>
+									<li><a href="productos.html">Productos</a></li>
+									<li><a href="licores.html">Licores</a></li>
+									<li><a href="combos.html">Combos</a></li>
+									<li><a href="sucursales.html">Sucursales</a></li>
+									
+								</ul>
+							</li>
+                          
+							<li><a href="login.html" class="button">Iniciar Sesion</a></li>
+							<li><a href="registro.html" class="button">Registrarse</a></li>
+						</ul>
+					</nav>
+				</header>
+            
+            <script type="text/javascript">
+function listadesucursales() {
+
+    $('#Lista').append("<h1 id = 'titulo'>Lista de sucursales </h1><table id='tabla' class='display'><thead><tr><th scope='col' abbr='Starter'>Identificacion</th><th scope='col' abbr='Starter'>Provincia</th><th scope='col' abbr='Starter'>Distrito</th><th scope='col' abbr='Starter'>Canton</th><th scope='col' abbr='Starter'>Nombre</th></thead><tbody></tbody></table>");
+    var Sucursal = new Object();
+    Sucursal.op = "listar";
+
+    $.ajax({
+        url: "http://localhost:1331/api/Sucursal",
+   
+        type: 'POST',
+        dataType: 'json',
+        data: Sucursal,
+        success: function (data, textStatus, xhr) {
+            
+                for (var ele in data) {
+
+                    var tableRef = document.getElementById('tabla').getElementsByTagName('tbody')[0];
+
+                    // Insert a row in the table at the last row
+                    var newRow = tableRef.insertRow(tableRef.rows.length);
+
+                    // Insert a cell in the row at index 0
+                    var newCell = newRow.insertCell(0);
+
+                    // Append a text node to the cell
+                    var newText = document.createTextNode(data[ele]._Id)
+
+                    newCell.appendChild(newText);
+
+                    var newCell2 = newRow.insertCell(1);
+
+                    //
+                    var newText2 = document.createTextNode(data[ele]._Provincia );
+                    newCell2.appendChild(newText2);
+                    //
+                    var newCell3 = newRow.insertCell(2);
+
+
+                    var newText3 = document.createTextNode(data[ele]._Distrito);
+                    newCell3.appendChild(newText3);
+
+                    var newCell3 = newRow.insertCell(3);
+                    
+                     var newText4 = document.createTextNode(data[ele]._Canton);
+                    newCell4.appendChild(newText4);
+
+                    var newCell4 = newRow.insertCell(4);
+                    
+                     var newText5 = document.createTextNode(data[ele]._Nombre);
+                    newCell5.appendChild(newText5);
+
+                    var newCell5 = newRow.insertCell(5);
+
+
+                  
+
+            }
+
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert(xhr);
+        }
+    });
+
+}
+                
+                 function crearpdf(){
+        var texto = document.getElementById('Lista').textContent;
+        alert(texto);
+        var doc = new jsPDF();
+
+        doc.setFontSize(12);
+        doc.text(1, 1, texto);
+        doc.text('la wea fome');
+        doc.save('tabla.pdf');
+    }
+</script>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Sucursales</h2>
+						<p>Nos encontramos en diferentes rincones del pais.</p>
+					</header>
+				 
+                    
+                        <div class="box">
+						
+							
+							
+								<div id='Lista'>
+									
+								
+                        </div>
+                            
+                            <input type="button" name="imprimir" value="Imprimir" onclick="window.print();">
+                            <input type="button" name="Descargar" value="Descargar" onclick="crearpdf();">
+                    </div>
+                    
+                    
+					
+             
+					
+					
+                    
+                    
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Todos los derechos reservados</li><li>Desarrollador: Tu gfa</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+</html>
