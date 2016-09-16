@@ -1,0 +1,229 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Productos</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+    
+   
+	<body onload="listadeproductos(), listadelicores(), comprobar()" >
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" >
+					<h1><a href="indexADMIN.html">Estrella Verde</a> Cafesito rikolino</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="indexADMIN.html">Página principal</a></li>
+						
+                               <li>
+								<a href="#" class="icon fa-angle-down">Formularios</a>
+								<ul>
+									<li><a href="productosform.html">Productos</a></li>
+									<li><a href="licoresform.html">Licores</a></li>
+									<li><a href="combosform.html">Combos</a></li>
+									<li><a href="sucursalesform.html">Sucursales</a></li>
+                                    <li><a href="producto_licorform.html">Producto_Licor</a></li>
+                                    <li><a href="producto_comboform.html">Producto_Combo</a></li>
+                                    <li><a href="sucursal_comboform.html">Sucursal_Combo</a></li>
+									
+								</ul>
+							</li>
+							
+							<li><a href="index.html" class="button special" onclick="logout()">Cerrar Sesion</a></li>
+						</ul>
+					</nav>
+				</header>
+            
+            <script type="text/javascript">
+function listadelicores() {
+    var Licor = new Object();
+    Licor.op = "listar";
+
+    $.ajax({
+        url: "http://localhost:1331/api/Licor",
+   
+        type: 'POST',
+        dataType: 'json',
+        data: Licor,
+        success: function (data, textStatus, xhr) {
+            
+                for (var ele in data) {
+                   var x = document.getElementById("licor");
+                   var option = document.createElement("option");
+                   option.text = data[ele]._Nombre;
+                   option.value = data[ele]._Id;
+                   option.id= data[ele]._Id;
+                   x.add(option);
+            }
+
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert(xhr);
+        }
+    });
+
+}
+                
+                
+                function insertarproductolicor()
+                {
+                    var NuevoProducto_Licor = new Object();
+    NuevoProducto_Licor.Id_Producto = document.getElementById("producto").value;
+    NuevoProducto_Licor.Id_Licor = document.getElementById("licor").value;
+    NuevoProducto_Licor.op = "Insertar";
+    $.ajax({
+        url: "http://localhost:1331/Api/Producto_Licor",
+        type: "POST",
+        datatype: "json",
+        data: NuevoProducto_Licor,
+        success: function(data,textstatus,xhr){
+        if(data=1)
+        {
+        alert("Producto insertado correctamente lml");
+            location.href="producto_licorform.html";
+    }
+    },
+        error:function(xhr,textstatus,errorThrown)
+        {
+        alert(textstatus);
+    }
+    });
+                    
+                    
+                    
+                }
+</script>
+            
+            
+            <script type="text/javascript">
+function listadeproductos() {
+    var Producto = new Object();
+    Producto.op = "listar";
+
+    $.ajax({
+        url: "http://localhost:1331/api/Producto",
+   
+        type: 'POST',
+        dataType: 'json',
+        data: Producto,
+        success: function (data, textStatus, xhr) {
+            
+                for (var ele in data) {
+                   var x = document.getElementById("producto");
+                   var option = document.createElement("option");
+                   option.text = data[ele]._Nombre;
+                   option.value = data[ele]._Id;
+                   option.id= data[ele]._Id;
+                   x.add(option);
+            }
+
+
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            alert(xhr);
+        }
+    });
+
+}
+                
+    function logout(){
+           localStorage.Usuario='papoi';
+            location.href="index.html";
+            }
+            
+                          function comprobar(){
+            if(localStorage.Usuario=='papoi'){
+                location.href="index.html";
+            }
+            
+        }
+</script>
+
+			<!-- Main -->
+				<section id="main" class="container">
+					<header>
+						<h2>Productos con licor</h2>
+						<p>Bebidas a base de cafe con licor y deliciosos bocadillos.</p>
+					</header>
+				 
+            
+					
+					
+					<div class="box">
+						<form>
+							<div class="row uniform 50%">
+							
+                                <p>Insertar un nuevo producto con licor</p>
+                                <div class="12u" id="Lista productos">
+                                
+                                </div>
+                                 <select id="producto"><option>Id Producto</option></select>
+                                <select id="licor"><option>Id Licor</option></select>
+							</div>
+                            
+                            <div class="row uniform">
+								<div class="12u">
+									<ul class="actions align-center">
+										<li><input type="submit" value="Guardar" onclick="insertarproductolicor()"/></li>
+									</ul>
+								</div>
+							</div>
+                            
+                        </form>
+                    </div>
+                            
+                            
+                           
+							
+							
+							
+                  
+                    
+                    
+				</section>
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Todos los derechos reservados</li><li>Desarrollador: Tu gfa</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+        
+        
+        
+ <script type="application/javascript">
+
+     
+     
+     
+     
+
+
+    </script>
+	</body>
+</html>

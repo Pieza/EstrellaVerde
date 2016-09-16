@@ -1,0 +1,117 @@
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Estrella Verde</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+	</head>
+	<body class="landing" onload="comprobar()">
+		<div id="page-wrapper">
+
+			<!-- Header -->
+				<header id="header" class="alt">
+					<h1><a href="indexADMIN.html">Estrella Verde</a> Cafesito rikolino</h1>
+					<nav id="nav">
+						<ul>
+							<li><a href="indexADMIN.html">Página principal</a></li>
+						
+                             <li>
+								<a href="#" class="icon fa-angle-down">Formularios</a>
+								<ul>
+									<li><a href="productosform.html">Productos</a></li>
+									<li><a href="licoresform.html">Licores</a></li>
+									<li><a href="combosform.html">Combos</a></li>
+									<li><a href="sucursalesform.html">Sucursales</a></li>
+                                    <li><a href="producto_licorform.html">Producto_Licor</a></li>
+                                    <li><a href="producto_comboform.html">Producto_Combo</a></li>
+                                    <li><a href="sucursal_comboform.html">Sucursal_Combo</a></li>
+									
+								</ul>
+							</li>
+                          
+							
+                            <li><a href="index.html" class="button special" onclick="logout()">Cerrar Sesion</a></li>
+						</ul>
+					</nav>
+				</header>
+
+			<!-- Banner -->
+				<section id="banner">
+					<h2>Estrella Verde</h2>
+					<p>El cafesito mas rikolino :3</p>
+					<ul class="actions">
+						<li><a href="index.html" class="button special" onclick="logout()">Cerrar Sesion</a></li>
+						
+					</ul>
+				</section>
+
+			<!-- Main -->
+				<section id="main" class="container">
+
+					<section class="box special">
+						<header class="major">
+							<h2>Aqui puedes administrar la wea xdxd
+							
+							</h2>
+							<p>Solo los administradores pueden agregar o modificar productos :v</p>
+						</header>
+						<span class="image featured"><img src="images/cafeteria.jpg" alt="" /></span>
+					</section>
+
+					
+
+				
+
+				</section>
+
+			
+
+			<!-- Footer -->
+				<footer id="footer">
+					<ul class="icons">
+						<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						
+						<li><a href="#" class="icon fa-google-plus"><span class="label">Google+</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Todos los derechos reservados</li><li>Desarrollador: Tu gfa</li>
+					</ul>
+				</footer>
+
+		</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.dropotron.min.js"></script>
+			<script src="assets/js/jquery.scrollgress.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+
+	</body>
+    
+    <script type="text/javascript">
+       
+        
+         function logout(){
+           localStorage.Usuario='papoi';
+            location.href="index.html";
+            }
+            
+                          function comprobar(){
+            if(localStorage.Usuario=='papoi'){
+                location.href="index.html";
+            }
+            
+        }
+    
+    
+    </script>
+</html>
